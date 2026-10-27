@@ -53,3 +53,4 @@ CATKIN_IGNORE
 # Project-specific
 __pycache__
 outputs
+*.bak

@@ -209,9 +209,9 @@ class RobotDataManager(Node):
     def publish_odom(self, base_pos, base_rot, base_lin_vel_b, base_ang_vel_b, env_idx):
         odom_msg = Odometry()
         odom_msg.header.stamp = self.get_clock().now().to_msg()
-        odom_msg.header.frame_id = "map"
+        odom_msg.header.frame_id = "odom"
         if (self.num_envs == 1):
-            odom_msg.child_frame_id = "base_link"
+            odom_msg.child_frame_id = "unitree_go2/base_link"
         else:
             odom_msg.child_frame_id = f"unitree_go2_{env_idx}/base_link"
         odom_msg.pose.pose.position.x = base_pos[0].item()
@@ -232,7 +232,7 @@ class RobotDataManager(Node):
         # transform
         map_base_trans = TransformStamped()
         map_base_trans.header.stamp = self.get_clock().now().to_msg()
-        map_base_trans.header.frame_id = "map"
+        map_base_trans.header.frame_id = "odom"
         if (self.num_envs == 1):
             map_base_trans.child_frame_id = "unitree_go2/base_link"
         else:
@@ -249,7 +249,7 @@ class RobotDataManager(Node):
     def publish_pose(self, base_pos, base_rot, env_idx):
         pose_msg = PoseStamped()
         pose_msg.header.stamp = self.get_clock().now().to_msg()
-        pose_msg.header.frame_id = "map"
+        pose_msg.header.frame_id = "odom"
         pose_msg.pose.position.x = base_pos[0].item()
         pose_msg.pose.position.y = base_pos[1].item()
         pose_msg.pose.position.z = base_pos[2].item()
