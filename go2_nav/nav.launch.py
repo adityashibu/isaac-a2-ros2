@@ -49,7 +49,12 @@ def generate_launch_description():
             "use_sim_time": use_sim_time,
             "target_frame": "unitree_go2/base_link",
             "transform_tolerance": 0.05,
-            "min_height": -0.30,
+            # Raised from -0.30: base_link sits ~0.42 m above the floor, and the
+            # gait bob tilts the lidar so floor returns would sweep into a low
+            # slice and look like obstacles ahead. -0.10 keeps the floor out
+            # while still catching obstacles taller than ~0.32 m. Lower it if
+            # short obstacles are missed; raise it if phantom hits return.
+            "min_height": -0.10,
             "max_height": 1.0,
             "angle_min": -3.14159265,
             "angle_max": 3.14159265,
