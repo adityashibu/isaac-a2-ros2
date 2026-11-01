@@ -1,0 +1,2 @@
+# Keep the presentation deck out of GitHub's language statistics
+presentation/** linguist-vendored
